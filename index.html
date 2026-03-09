@@ -3,256 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HBD Mahu - Từ Core Team TEDx25</title>
+    <title>For Mahu - Special Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --ted-red: #E62B1E;
-            --ted-orange: #FF8C00;
-            --dark-bg: #111111;
-            --text-color: #ffffff;
+            --bg-color: #fcf8f5;
+            --accent-pink: #ffc2d1;
+            --accent-orange: #ffb5a7;
+            --text-dark: #4a4e69;
         }
 
-        body, html {
-            margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            overflow-x: hidden; /* Chỉ cho cuộn dọc nếu cần */
-            background: var(--dark-bg);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-color);
-        }
-
-        /* Nền Gradient Cam Đỏ rực rỡ */
-        .main-wrapper {
-            background: linear-gradient(135deg, var(--ted-red), #440000 50%, var(--ted-orange));
-            min-height: 100vh;
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(#ffb5a7 0.5px, transparent 0.5px);
+            background-size: 20px 20px; /* Nền chấm bi cute */
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-dark);
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
             padding: 20px;
         }
 
-        /* Container chính */
-        .birthday-card {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid var(--ted-orange);
-            border-radius: 15px;
-            box-shadow: 0 0 40px rgba(255, 140, 0, 0.4);
+        .booth-container {
+            background: white;
+            padding: 30px;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             max-width: 900px;
             width: 100%;
-            padding: 40px;
-            animation: cardFadeIn 1s ease-out;
-        }
-
-        @keyframes cardFadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Bố cục Grid cho Ảnh và Lời chúc */
-        .content-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 2 cột bằng nhau */
-            gap: 30px;
-            margin-top: 30px;
+            grid-template-columns: 350px 1fr;
+            gap: 40px;
+            border: 1px solid #eee;
         }
 
-        /* Phần hiển thị ảnh */
-        .image-zone {
-            display: grid;
-            grid-template-rows: 1fr 1fr; /* 2 hàng ảnh */
-            gap: 20px;
+        /* Hiệu ứng dải ảnh Photobooth */
+        .photobooth-strip {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: #fff;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
         }
 
         .photo-frame {
-            border: 4px solid #fff;
-            border-radius: 10px;
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #eee;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            transition: transform 0.3s;
+            border: 2px solid #f9f9f9;
             position: relative;
-        }
-
-        .photo-frame:hover {
-            transform: rotate(-3deg) scale(1.05);
-            z-index: 10;
-        }
-
-        .photo-frame:nth-child(2):hover {
-            transform: rotate(3deg) scale(1.05);
         }
 
         .photo-frame img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Đảm bảo ảnh không bị méo */
-            display: block;
+            object-fit: cover;
+            transition: 0.5s;
         }
 
-        /* Nhãn ảnh (Mahu/TEDx) */
-        .photo-label {
-            position: absolute;
-            bottom: 10px; left: 10px;
-            background: rgba(230, 43, 30, 0.8);
-            color: white;
-            padding: 5px 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border-radius: 4px;
+        .photo-frame:hover img {
+            transform: scale(1.1);
         }
 
-        /* Phần lời chúc */
-        .wish-zone {
-            text-align: left;
+        .caption {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: var(--accent-orange);
+        }
+
+        /* Nội dung lời chúc */
+        .wish-content {
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
         h1 {
-            color: var(--ted-orange);
-            font-size: 2.8rem;
-            margin: 0 0 10px 0;
-            text-transform: uppercase;
-            letter-spacing: -1px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ff8fa3;
+            margin: 0 0 20px 0;
         }
 
-        .to-mahu {
+        .message-text {
             font-size: 1.1rem;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 20px;
-            display: block;
+            line-height: 1.8;
+            background: #fffafa;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px dashed var(--accent-pink);
         }
 
-        .main-wish {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #eee;
-            margin-bottom: 25px;
-        }
-
-        .highlight {
-            color: var(--ted-orange);
-            font-weight: bold;
-        }
-
-        /* Ô trích dẫn */
-        .quote-box {
-            background: rgba(255, 255, 255, 0.1);
-            border-left: 4px solid var(--ted-red);
-            padding: 15px;
+        .quote {
+            margin-top: 25px;
             font-style: italic;
-            color: #ccc;
-            margin-top: auto; /* Đẩy xuống dưới cùng của wish-zone */
+            border-left: 3px solid var(--accent-orange);
+            padding-left: 15px;
+            color: #8d99ae;
         }
 
-        /* Nút tương tác */
-        .action-btn {
-            background: var(--ted-red);
+        .btn-celebrate {
+            background: var(--accent-pink);
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 30px;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 25px;
+            margin-top: 30px;
             transition: 0.3s;
-            align-self: flex-start; /* Nút không bị kéo dài */
+            width: fit-content;
         }
 
-        .action-btn:hover {
-            background: var(--ted-orange);
-            box-shadow: 0 0 15px rgba(255, 140, 0, 0.7);
+        .btn-celebrate:hover {
+            background: #ff8fa3;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 194, 209, 0.4);
         }
 
-        .from-team {
+        .footer-tag {
             margin-top: 40px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.5);
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #bdc3c7;
         }
 
-        /* Responsive cho điện thoại */
         @media (max-width: 768px) {
-            .content-grid {
-                grid-template-columns: 1fr; /* Chuyển thành 1 cột */
-            }
-            h1 { font-size: 2.2rem; }
-            .card { padding: 20px; }
+            .booth-container { grid-template-columns: 1fr; }
+            .photobooth-strip { transform: rotate(0); }
         }
     </style>
 </head>
 <body>
 
-<div class="main-wrapper">
-    <div class="birthday-card">
-        <span class="to-mahu">[ TIN NHẮN KHẨN TỪ CORE TEAM ]</span>
-        <h1>HAPPY BIRTHDAY, MAHU! 🧡</h1>
+<div class="booth-container">
+    <div class="photobooth-strip">
+        <div class="photo-frame">
+            <img src="link_anh_mahu.jpg" alt="Mahu">
+        </div>
+        <div class="photo-frame">
+            <img src="link_anh_tedx.jpg" alt="TEDx Team">
+        </div>
+        <div class="caption">Mahu & TEDx25 Forever 🌸</div>
+    </div>
 
-        <div class="content-grid">
-            <div class="image-zone">
-                <div class="photo-frame">
-                    <img src="link_anh_mahu.jpg" alt="Mahu's Photo">
-                    <div class="photo-label">THE BIRTHDAY GIRL</div>
-                </div>
-                <div class="photo-frame">
-                    <img src="link_anh_tedx.jpg" alt="TEDx Team Photo">
-                    <div class="photo-label">TEDx25 FAMILY</div>
-                </div>
-            </div>
-
-            <div class="wish-zone">
-                <p class="main-wish">
-                    Muhahaha… <span class="highlight">Happy birthday bà nhé!</span><br><br>
-                    Chúc bà một tuổi mới tràn đầy tiếng cười (như cái điệu cười mở đầu kia), một năm thật rực rỡ với muôn vàn cơ hội và trải nghiệm thú vị đang chờ bà phía trước. <br><br>
-                    Hơn hết, chúc bà sẽ <span class="highlight">thành công, thành công, ĐẠI thành công</span> trong năm này nha. <br><br>
-                    Team muốn nhắn bà rằng: Bà đã và đang làm rất tuyệt vời, vì thế, cứ tự tin tiến về phía trước để nắm lấy vận mệnh của mình nhé!
-                </p>
-
-                <div class="quote-box">
-                    “Không ai biết được tương lai nắm giữ điều gì. Bởi vì thế nên khả năng của nó là vô hạn...”
-                </div>
-
-                <button class="action-btn" onclick="celebrate()">KÍCH HOẠT PHÁO HOA</button>
-            </div>
+    <div class="wish-content">
+        <h1>Happy Birthday!</h1>
+        <div class="message-text">
+            Muhahaha… chúc bà một sinh nhật tràn đầy niềm vui và tiếng cười nha. <br><br>
+            Tuổi mới thật rực rỡ với những cơ hội và trải nghiệm thú vị đang chờ bà phía trước. Tui chúc bà sẽ 
+            <strong>thành công, thành công, đại thành công</strong>. <br><br>
+            Bà đã và đang làm rất tuyệt dzời, nên đừng ngần ngại nắm lấy vận mệnh và khai phá thiên cơ của chính mình nhé!
         </div>
 
-        <div class="from-team">
-            Thương gửi từ <strong>coreteamtedx25</strong> với rất nhiều ❤️
+        <div class="quote">
+            “Không ai biết được tương lai nắm giữ điều gì. Bởi vì thế nên khả năng của nó là vô hạn...”
         </div>
+
+        <button class="btn-celebrate" onclick="pop()">Kích hoạt phép màu ✨</button>
+        
+        <div class="footer-tag">From Coreteamtedx25 with love</div>
     </div>
 </div>
 
 <script>
-    // Hàm bắn pháo hoa
-    function celebrate() {
-        var duration = 5 * 1000;
-        var animationEnd = Date.now() + duration;
-        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-        function randomInRange(min, max) {
-          return Math.random() * (max - min) + min;
-        }
-
-        var interval = setInterval(function() {
-          var timeLeft = animationEnd - Date.now();
-
-          if (timeLeft <= 0) {
-            return clearInterval(interval);
-          }
-
-          var particleCount = 50 * (timeLeft / duration);
-          // Bắn pháo hoa từ 2 bên
-          confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#E62B1E', '#ffffff'] }));
-          confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#FF8C00', '#ffffff'] }));
-        }, 250);
+    function pop() {
+        // Pháo hoa màu pastel
+        const colors = ['#ffc2d1', '#ffb5a7', '#fb6f92', '#ffffff'];
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: colors
+        });
     }
-
-    // Tự động bắn khi load trang
-    window.onload = celebrate;
+    // Chạy nhẹ khi vừa vào
+    window.onload = () => {
+        setTimeout(pop, 500);
+    };
 </script>
 
 </body>
