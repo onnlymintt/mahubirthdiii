@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Our Big Love - Mahu</title>
+    <title>21st Mahu - Our Big Love</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --bg-soft: #ffffff;
             --accent-pink: #ffdae0;
-            --text-main: #5d5d5d;
+            --text-main: #4a4e69;
+            --ted-orange: #ffb5a7;
         }
 
         body {
-            background-color: #fdfdfd;
-            background-image: radial-gradient(#ffe5ec 1px, transparent 1px);
-            background-size: 30px 30px;
+            background-color: #fffafb;
+            background-image: radial-gradient(#ffe5ec 1.5px, transparent 1.5px);
+            background-size: 40px 40px;
             font-family: 'Quicksand', sans-serif;
             color: var(--text-main);
             margin: 0;
@@ -24,76 +25,98 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 40px 20px;
         }
 
         .booth-wrapper {
             background: white;
-            padding: 40px;
-            border-radius: 4px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.03);
-            max-width: 950px;
-            width: 90%;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.2);
+            max-width: 1100px; /* Bự hơn bản cũ */
+            width: 95%;
             display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 50px;
-            border: 1px solid #f0f0f0;
+            grid-template-columns: 400px 1fr; /* Cột ảnh bự hơn */
+            gap: 60px;
+            border: 1px solid #fff0f3;
+            position: relative;
         }
 
-        /* Photobooth Frame Logic */
+        /* Photobooth Frame - Design Bự & Rõ */
         .strip {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
             background: #fff;
-            padding: 15px 15px 40px 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            transform: rotate(-1deg);
+            padding: 20px 20px 60px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transform: rotate(-1.5deg);
             border: 1px solid #eee;
+            height: fit-content;
         }
 
         .photo {
             width: 100%;
-            aspect-ratio: 4/3;
-            background: #f9f9f9;
+            aspect-ratio: 1/1; /* Ảnh vuông cho bự và đều */
+            background: #fdfdfd;
             overflow: hidden;
-            border: 1px solid #f0f0f0;
+            border: 1px solid #f8f8f8;
         }
 
         .photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: 0.5s;
         }
+
+        .photo:hover img { transform: scale(1.08); }
 
         .strip-footer {
             font-family: 'Dancing Script', cursive;
             text-align: center;
-            font-size: 1.4rem;
-            margin-top: 20px;
+            font-size: 1.8rem;
+            margin-top: 25px;
             color: #ff8fa3;
         }
 
-        /* Wish Content */
+        /* Lời chúc - Design thoáng và bự */
         .content {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            text-align: left;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 3.8rem;
+            font-size: 4.5rem;
             color: #ff758f;
-            margin: 0 0 15px 0;
+            margin: 0 0 10px 0;
+            line-height: 1;
         }
 
-        .message {
+        .to-mahu {
+            font-size: 1.2rem;
+            color: #ffb3c1;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .wish-container {
             font-size: 1.15rem;
             line-height: 1.8;
-            background: #fff;
-            border-left: 5px solid var(--accent-pink);
-            padding: 20px;
+        }
+
+        .poem-box {
+            background: #fffafa;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px dashed #ffc2d1;
             margin: 20px 0;
+            font-style: italic;
+            color: #6d6d6d;
+            white-space: pre-line; /* Giữ xuống dòng cho thơ */
         }
 
         .highlight {
@@ -101,26 +124,45 @@
             font-weight: 600;
         }
 
+        .short-wishes {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .wish-item {
+            background: #fff;
+            padding: 15px 20px;
+            border-left: 4px solid #ffb3c1;
+            box-shadow: 2px 5px 15px rgba(0,0,0,0.02);
+            font-size: 1.1rem;
+        }
+
         .btn {
             background: #ffb3c1;
             color: white;
             border: none;
-            padding: 15px 35px;
+            padding: 18px 45px;
             border-radius: 50px;
             font-family: 'Quicksand', sans-serif;
             font-weight: 600;
+            font-size: 1.1rem;
             cursor: pointer;
             width: fit-content;
+            margin-top: 40px;
             transition: 0.3s;
         }
 
         .btn:hover {
             background: #ff758f;
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 117, 143, 0.3);
         }
 
-        @media (max-width: 800px) {
-            .booth-wrapper { grid-template-columns: 1fr; }
+        @media (max-width: 900px) {
+            .booth-wrapper { grid-template-columns: 1fr; padding: 25px; }
+            .strip { transform: rotate(0); }
+            h1 { font-size: 3rem; }
         }
     </style>
 </head>
@@ -131,37 +173,70 @@
         <div class="photo"><img src="hu" alt="Mahu"></div>
         <div class="photo"><img src="team" alt="Team 1"></div>
         <div class="photo"><img src="team2" alt="Team 2"></div>
-        <div class="strip-footer">Our big love, Mahu 🌸</div>
+        <div class="strip-footer">Our Big Love, Mahu 🌸</div>
     </div>
 
     <div class="content">
-        <h1>Happy Birthday!</h1>
-        <div class="message">
-            Muhahaha… <span class="highlight">Chúc bà với tình yêu mãi nồng cháy nha!</span> <br><br>
-            Bà phải luôn nhớ rằng: <span class="highlight">Mahu mãi là tình yêu to bự của tụi tui.</span> <br><br>
-            Chúc bà một tuổi mới rực rỡ, thành công đại thành công. Cứ tin vào bản thân vì bà tuyệt dzời lắm, tụi tui rất yêu sự nhạy cảm, dễ thương của bàaaaa. Bà cũng rất rất giỏi nữa <3
+        <span class="to-mahu">HAPPY 21ST BIRTHDAY</span>
+        <h1>Sweet 21, Mahu!</h1>
+        
+        <div class="wish-container">
+            <p>
+                Muhahaha… <span class="highlight">Chúc bà với tình yêu mãi nồng cháy nha!</span> 
+                Sweet 21 nhé Mahu ơi, chúc gái luôn xinh đẹp, hạnh phúc, tuổi mới có thêm thật nhiều kỉ niệm đẹp, đạt thật nhiều aim, luôn iu đời nhó.
+            </p>
+
+            <div class="poem-box">
+                Mahu hai mốt hôm nay,
+                Nụ cười như nắng đong đầy tháng năm.
+                Chúc em ngày tháng êm đềm,
+                Ước mơ khẽ nở, dịu êm trong lòng.
+
+                Tuổi xuân rực rỡ như hồng,
+                Bình yên theo bước, nắng hồng theo vai.
+                Mong cho mỗi sớm ban mai,
+                Mahu luôn thấy cuộc đời thật xinh.
+            </div>
+
+            <p class="highlight" style="font-size: 1.3rem;">
+                "Chúc 21st mahu không lu bu nhưng vẫn triệu phú!" 💸
+            </p>
+
+            <div class="short-wishes">
+                <div class="wish-item">
+                    Nhân dịp tủi 21 của mahu tui muốn nói là mahu lun là người bạn rất quan trọng với tui và cả core TEDx, chúc bà ngày càng xinh đẹp, bùng lổ ở tuổi 21 nhenn :33
+                </div>
+                <div class="wish-item">
+                    Chúc mahu ngày càng xinh đẹp và lun đầy ắp tình yêuuu. <br>
+                    Tụi tui rất yêu sự nhạy cảm, dễ thương của bàaaaa. Bà cũng rất rất giỏi nữa <3
+                </div>
+            </div>
         </div>
 
         <button class="btn" onclick="magic()">Kích hoạt phép màu ✨</button>
         
-        <div style="margin-top: 30px; font-size: 0.8rem; color: #ccc;">FROM CORETEAMTEDX25 WITH LOVE</div>
+        <div style="margin-top: 40px; font-size: 0.85rem; color: #d1d1d1; font-weight: 600;">
+            FROM CORETEAMTEDX25 WITH LOVE 🧡
+        </div>
     </div>
 </div>
 
 <script>
     function magic() {
-        const duration = 3 * 1000;
+        const duration = 4 * 1000;
         const animationEnd = Date.now() + duration;
-        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+        const defaults = { startVelocity: 35, spread: 360, ticks: 80, zIndex: 999 };
 
         const interval = setInterval(function() {
             const timeLeft = animationEnd - Date.now();
             if (timeLeft <= 0) return clearInterval(interval);
-            const particleCount = 50 * (timeLeft / duration);
-            confetti({...defaults, particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ffb3c1', '#ff758f', '#ffffff']});
+            const particleCount = 60 * (timeLeft / duration);
+            
+            // Bắn tung tóe màu pastel xinh xắn
+            confetti({...defaults, particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ffb3c1', '#ff758f', '#ffffff', '#ffccd5']});
         }, 250);
     }
-    window.onload = magic;
+    window.onload = () => { setTimeout(magic, 800); };
 </script>
 
 </body>
